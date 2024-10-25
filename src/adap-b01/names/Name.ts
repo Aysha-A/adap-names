@@ -55,5 +55,4 @@ export class Name {
     public remove(i: number): void {
         this.components.splice(i,1);                // Stelle i löschen
     }
-
 }
