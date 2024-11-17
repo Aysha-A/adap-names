@@ -7,27 +7,33 @@ export class StringArrayName extends AbstractName {
 
     constructor(other: string[], delimiter?: string) {
         super();
-        throw new Error("needs implementation");
+        this.components = other; 
+        if (delimiter !== undefined) {                  //falls delimiter angegeben 
+           this.delimiter = delimiter;
+
+        } else {                        
+            this.delimiter = DEFAULT_DELIMITER;    // delimiter nicht angegeben
+        }
     }
 
     getNoComponents(): number {
-        throw new Error("needs implementation");
+        return this.components.length;              //Laenge der Komponente 
     }
 
     getComponent(i: number): string {
-        throw new Error("needs implementation");
+        return this.components[i];                  //Komponenete an der Stelle i
     }
     setComponent(i: number, c: string) {
-        throw new Error("needs implementation");
+        this.components[i] = c;                     // c ist Komponente an Stelle i
     }
 
     insert(i: number, c: string) {
-        throw new Error("needs implementation");
+        this.components.splice(i,0,c);             //c an Stelle i hinzufügen
     }
     append(c: string) {
-        throw new Error("needs implementation");
+        this.components.push(c);                    // am Ende c hinzufügen
     }
     remove(i: number) {
-        throw new Error("needs implementation");
+        this.components.splice(i,1);                // Stelle i löschen
     }
 }
