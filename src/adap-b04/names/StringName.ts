@@ -9,15 +9,7 @@ export class StringName extends AbstractName {
 
     constructor(other: string, delimiter?: string) {
         super();
-        this.name = other; 
-        if (delimiter !== undefined) {                  //falls delimiter angegeben 
-           this.delimiter = delimiter;
-
-        } else {                        
-            this.delimiter = DEFAULT_DELIMITER;    // delimiter nicht angegeben
-        }
-        this.length= this.getNoComponents();
-    
+        throw new Error("needs implementation");
     }
 
     public clone(): Name {
