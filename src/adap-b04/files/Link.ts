@@ -1,5 +1,6 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 export class Link extends Node {
 
@@ -18,6 +19,9 @@ export class Link extends Node {
     }
 
     public setTargetNode(target: Node): void {
+        if (target== null){         //precondition
+            throw new IllegalArgumentException("Invalid target");
+        }
         this.targetNode = target;
     }
 

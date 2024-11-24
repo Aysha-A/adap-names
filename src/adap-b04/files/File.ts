@@ -1,5 +1,6 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 enum FileState {
     OPEN,
@@ -9,6 +10,7 @@ enum FileState {
 
 export class File extends Node {
 
+    
     protected state: FileState = FileState.CLOSED;
 
     constructor(baseName: string, parent: Directory) {
@@ -16,10 +18,17 @@ export class File extends Node {
     }
 
     public open(): void {
+        if (this.state !== FileState.CLOSED){       //precondition
+            throw new IllegalArgumentException("Invalid file state");
+        }
+        
         // do something
     }
 
     public close(): void {
+        if (this.state !== FileState.OPEN){         //precondition
+            throw new IllegalArgumentException("Invalid file state");
+        }
         // do something
     }
 

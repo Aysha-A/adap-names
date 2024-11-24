@@ -16,7 +16,7 @@ export class StringName extends AbstractName {
         } else {                        
             this.delimiter = DEFAULT_DELIMITER;    // delimiter nicht angegeben
         }
-        this.length= this.getNoComponents();
+        
     
     }
 
@@ -53,31 +53,39 @@ export class StringName extends AbstractName {
     }
 
     public getNoComponents(): number {
-        throw new Error("needs implementation");
+        return this.name.length;              //Laenge der Komponente
     }
 
     public getComponent(i: number): string {
-        throw new Error("needs implementation");
+        return this.name[i];                  //Komponenete an der Stelle x
     }
 
     public setComponent(i: number, c: string) {
-        throw new Error("needs implementation");
+        const components = this.name.split(this.delimiter); // Aufteilung in einzelne Komponenete
+        components[i] = c;                 // c ist Komponente an Stelle i
+        this.name = components.join(this.delimiter); // neuer zusammengefuegter String
     }
 
     public insert(i: number, c: string) {
-        throw new Error("needs implementation");
+        const components = this.name.split(this.delimiter);  // Aufteilung in einzelne Komponenete
+        components.splice(i,0,c);             //c an Stelle i hinzufügen 
+        this.name = components.join(this.delimiter); // neuer zusammengefuegter String
     }
 
     public append(c: string) {
-        throw new Error("needs implementation");
+        this.name += this.delimiter + c;                    // am Ende c hinzufügen
     }
 
     public remove(i: number) {
-        throw new Error("needs implementation");
+        const components = this.name.split(this.delimiter);  // Aufteilung in einzelne Komponenete
+        components.splice(i,1);                       // Stelle i löschen
+        this.name = components.join(this.delimiter); // neuer zusammengefuegter String
     }
 
     public concat(other: Name): void {
-        throw new Error("needs implementation");
+        for(let i=0; i < other.getNoComponents(); i++){
+            this.append(other.getComponent(i))     //other hinzufuegen
+           }
     }
 
 }

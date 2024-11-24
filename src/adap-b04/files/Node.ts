@@ -1,3 +1,4 @@
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 import { Name } from "../names/Name";
 import { Directory } from "./Directory";
 
@@ -12,6 +13,9 @@ export class Node {
     }
 
     public move(to: Directory): void {
+        if (this.parentNode ==to){           //precondition  
+            throw new IllegalArgumentException("Invalid target directory");
+        }
         this.parentNode.remove(this);
         to.add(this);
     }

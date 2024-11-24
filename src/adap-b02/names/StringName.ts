@@ -15,7 +15,7 @@ export class StringName implements Name {
         } else {                        
             this.delimiter = DEFAULT_DELIMITER;    // delimiter nicht angegeben
         }
-        this.length= this.getNoComponents();
+        
     }
 
     public asString(delimiter: string = this.delimiter): string {
