@@ -1,5 +1,6 @@
 import { File } from "./File";
 import { Directory } from "./Directory";
+import { ServiceFailureException } from "../common/ServiceFailureException";
 
 export class BuggyFile extends File {
 
@@ -12,7 +13,7 @@ export class BuggyFile extends File {
      * @returns base name, here always ""
      */
     protected doGetBaseName(): string {
-        this.baseName = "";
+        this.baseName = "test";
         return super.doGetBaseName();
     }
 

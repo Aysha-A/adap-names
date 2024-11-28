@@ -8,8 +8,8 @@ export class StringName extends AbstractName {
     protected noComponents: number = 0;
 
     constructor(other: string, delimiter?: string) {
-        super();
-        throw new Error("needs implementation or deletion");
+        super(delimiter); //delimiter aus abstrakten Klasse 
+        this.name = other; 
     }
 
     public clone(): Name {

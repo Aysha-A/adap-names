@@ -1,6 +1,7 @@
 import { ExceptionType, AssertionDispatcher } from "../common/AssertionDispatcher";
 import { IllegalArgumentException } from "../common/IllegalArgumentException";
 import { InvalidStateException } from "../common/InvalidStateException";
+import { ServiceFailureException } from "../common/ServiceFailureException";
 
 import { Name } from "../names/Name";
 import { Directory } from "./Directory";
@@ -14,6 +15,7 @@ export class Node {
         this.doSetBaseName(bn);
         this.parentNode = pn; // why oh why do I have to set this
         this.initialize(pn);
+        
     }
 
     protected initialize(pn: Directory): void {
@@ -58,7 +60,28 @@ export class Node {
      * @param bn basename of node being searched for
      */
     public findNodes(bn: string): Set<Node> {
-        throw new Error("needs implementation or deletion");
+        const NodeMatch = new Set<Node>();
+        const visited = new Set<Node>();
+        const dfs = (node: Node) =>{
+            if(visited.has(node)){
+                return;                 //abbrechen, falls node bereits besucht
+            }
+            visited.add(node);          //Knoten als besucht markieren
+        
+        if (node.getBaseName() == bn){    //falls BaseName übereinstimmt    
+            NodeMatch.add(node);
+         }  
+        
+         const childNodes= node.parentNode.getChildNodes();
+         if(childNodes){                    //Kindknoten durchsuchen
+            for(const child of childNodes){
+                dfs(child);
+            }
+
+         }
+        };
+        dfs(this); 
+         return NodeMatch;
     }
 
     protected assertClassInvariants(): void {
