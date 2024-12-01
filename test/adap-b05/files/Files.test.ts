@@ -2,11 +2,11 @@ import { describe, it, expect } from "vitest";
 
 import { StringName } from "../../../src/adap-b05/names/StringName";
 
+import { RootNode } from "../../../src/adap-b05/files/RootNode";
 import { Node } from "../../../src/adap-b05/files/Node";
 import { File } from "../../../src/adap-b05/files/File";
 import { BuggyFile } from "../../../src/adap-b05/files/BuggyFile";
 import { Directory } from "../../../src/adap-b05/files/Directory";
-import { RootNode } from "../../../src/adap-b05/files/RootNode";
 import { Exception } from "../common/Exception";
 import { ServiceFailureException } from "../../../src/adap-b05/common/ServiceFailureException";
 import { InvalidStateException } from "../../../src/adap-b05/common/InvalidStateException";
@@ -35,7 +35,8 @@ describe("Basic naming test", () => {
   it("test name checking", () => {
     let fs: RootNode = createFileSystem();
     let ls: Node = [...fs.findNodes("ls")][0];
-    //expect(ls.getFullName().isEqual(new StringName("/usr/bin/ls", '/'))).toBe(true);
+    expect(ls.getFullName().isEqual(new StringName("/usr/bin/ls", '/'))).toBe(true);
+    
   });
   
 });

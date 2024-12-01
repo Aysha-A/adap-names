@@ -61,28 +61,23 @@ export class Node {
      */
     public findNodes(bn: string): Set<Node> {
         const NodeMatch = new Set<Node>();
-        const visited = new Set<Node>();
-        const dfs = (node: Node) =>{
-            if(visited.has(node)){
-                return;                 //abbrechen, falls node bereits besucht
-            }
-            visited.add(node);          //Knoten als besucht markieren
         
-        if (node.getBaseName() == bn){    //falls BaseName übereinstimmt    
-            NodeMatch.add(node);
+        if (this.getBaseName() == bn){      //falls BaseName übereinstimmt    
+            NodeMatch.add(this);
          }  
         
-         const childNodes= node.parentNode.getChildNodes();
-         if(childNodes){                    //Kindknoten durchsuchen
-            for(const child of childNodes){
-                dfs(child);
+        if (this instanceof Directory){     //Kinderknoten durchgehen
+            for (const child of this.getChildNodes()){
+                for (const ChildMatch of child.findNodes(bn)) //rekusriver Aufruf
+                NodeMatch.add(ChildMatch);
             }
-
-         }
-        };
-        dfs(this); 
-         return NodeMatch;
+        }
+     return NodeMatch; 
+       
     }
+        
+        
+    
 
     protected assertClassInvariants(): void {
         const bn: string = this.doGetBaseName();

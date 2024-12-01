@@ -25,7 +25,16 @@ export class StringName extends AbstractName {
     }
 
     public isEqual(other: Name): boolean {
-        throw new Error("needs implementation or deletion");
+        if(this.getNoComponents() !== other.getNoComponents()){        //Vergeleiche ob Laenge gleich
+            return false;
+        }
+        for (let i=0; i< this.getNoComponents(); i++){
+            if (this.getComponent(i) !== other.getComponent(i)){       //Vergleiche ob Stelle i gleich
+                return false;
+            }
+        }
+        
+            return true;
     }
 
     public getHashCode(): number {
@@ -41,11 +50,12 @@ export class StringName extends AbstractName {
     }
 
     public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
+        return this.name.split(this.delimiter).length;              //Laenge der Komponente
     }
 
     public getComponent(i: number): string {
-        throw new Error("needs implementation or deletion");
+        const components = this.name.split(this.delimiter) //Komponenten voneinander trennen
+        return components[i];                  //Komponenete an der Stelle i
     }
 
     public setComponent(i: number, c: string) {
@@ -57,7 +67,7 @@ export class StringName extends AbstractName {
     }
 
     public append(c: string) {
-        throw new Error("needs implementation or deletion");
+        this.name += this.delimiter + c;                    // am Ende c hinzufügen
     }
 
     public remove(i: number) {
